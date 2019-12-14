@@ -22,7 +22,7 @@ a.edit {
     display: inline-block;
     width: 32px;
     height: 32px;
-    background: url('edit.png');
+    background: url('../../edit.png');
 }
 
 a.add-button {
@@ -32,7 +32,7 @@ a.add-button {
     line-height: 32px;
     margin: 5px 5px 0 0;
     padding: 2px 5px 2px 36px;
-    background: #0C4 url('add.png') 2px 2px no-repeat;
+    background: #0C4 url('../../add.png') 2px 2px no-repeat;
     color: #333;
     text-decoration: none;
 }
