@@ -1,7 +1,6 @@
 package dao.mysql;
 
 import dao.*;
-import domain.Role;
 import domain.User;
 
 import java.sql.*;

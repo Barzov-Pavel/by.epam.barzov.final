@@ -55,7 +55,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             getTransaction().start();
             if (user.getId() != null) {
-                User storedUser = (User) userDao.read(user.getId());
+                User storedUser = userDao.read(user.getId());
                 if (storedUser != null) {
                     user.setPassword(storedUser.getPassword());
                     if (storedUser.getUserName().equals(user.getUserName()) || userDao.readByLogin(user.getUserName()) == null) {

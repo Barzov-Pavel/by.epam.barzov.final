@@ -3,6 +3,8 @@ import dao.DaoException;
 import dao.mysql.UserDaoImpl;
 import domain.Role;
 import domain.User;
+import service.ServiceException;
+import service.logic.UserServiceImpl;
 import util.Connector;
 
 import java.sql.Connection;
@@ -28,12 +30,14 @@ public class Main {
         try {
             connection = Connector.getConnection();
             userDao.setConnection(connection);
-            System.out.println(userDao.read(Long.valueOf(2)));
+            UserServiceImpl userService = new UserServiceImpl();
+            userService.setUserDao(userDao);
+            System.out.println(userService.findAll());
             user.setId(Long.valueOf(2));
-            userDao.update(user);
-            System.out.println(userDao.read(Long.valueOf(2)));
 
-        } catch (SQLException | DaoException e) {
+            System.out.println(userService.findById(Long.parseLong("2")));
+
+        } catch (SQLException | ServiceException e) {
             e.printStackTrace();
         } /*catch (DaoException e) {
             e.printStackTrace();
