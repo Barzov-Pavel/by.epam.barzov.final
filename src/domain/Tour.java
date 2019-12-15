@@ -9,8 +9,8 @@ public class Tour implements Serializable {
     private String title;
     private String description;
     private String destination;
-    private TourType type;
-    boolean hot;
+    private String type;
+    private boolean hot;
     private BigDecimal price;
     private boolean enabled;
     private Double avgRating;
@@ -56,11 +56,11 @@ public class Tour implements Serializable {
         this.destination = destination;
     }
 
-    public TourType getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TourType type) {
+    public void setType(String type) {
         this.type = type;
     }
 

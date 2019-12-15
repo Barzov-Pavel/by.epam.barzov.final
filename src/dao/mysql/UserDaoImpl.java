@@ -7,7 +7,44 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl extends BaseDaoIpl implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl implements UserDao {
+    @Override
+    public Long create(User user) throws DaoException {
+        String sql = "INSERT INTO `user` (`username`, `firstName`, " +
+                "`lastName`, `password`, `discount`, `telephone`, `role`)" +
+                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            statement.setString(1, user.getUserName());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+            statement.setString(4, user.getPassword());
+            statement.setInt(5, user.getDiscount());
+            statement.setString(6, user.getTelephone());
+            statement.setString(7, user.getRole());
+            statement.executeUpdate();
+            Long id = null;
+            resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                id = resultSet.getLong(1);
+            }
+            return id;
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e) {
+            }
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+            }
+        }
+    }
+
     @Override
     public User read(Long id) throws DaoException {
         String sql = "SELECT * FROM `user` WHERE id=?";
@@ -80,42 +117,7 @@ public class UserDaoImpl extends BaseDaoIpl implements UserDao {
         }
     }
 
-    @Override
-    public Long create(User user) throws DaoException {
-        String sql = "INSERT INTO `user` (`username`, `firstName`, " +
-                "`lastName`, `password`, `discount`, `telephone`, `role`)" +
-                " VALUES (?, ?, ?, ?, ?, ?, ?)";
-        PreparedStatement statement = null;
-        ResultSet resultSet = null;
-        try {
-            statement = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, user.getUserName());
-            statement.setString(2, user.getFirstName());
-            statement.setString(3, user.getLastName());
-            statement.setString(4, user.getPassword());
-            statement.setInt(5, user.getDiscount());
-            statement.setString(6, user.getTelephone());
-            statement.setString(7, user.getRole());
-            statement.executeUpdate();
-            Long id = null;
-            resultSet = statement.getGeneratedKeys();
-            if (resultSet.next()) {
-                id = resultSet.getLong(1);
-            }
-            return id;
-        } catch (SQLException e) {
-            throw new DaoException(e);
-        } finally {
-            try {
-                statement.close();
-            } catch (Exception e) {
-            }
-            try {
-                resultSet.close();
-            } catch (Exception e) {
-            }
-        }
-    }
+
 
     @Override
     public void update(User user) throws DaoException {

@@ -1,12 +1,16 @@
 import dao.Dao;
 import dao.DaoException;
+import dao.mysql.TourDaoImpl;
 import dao.mysql.UserDaoImpl;
 import domain.Role;
+import domain.Tour;
+import domain.TourType;
 import domain.User;
 import service.ServiceException;
 import service.logic.UserServiceImpl;
 import util.Connector;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -15,31 +19,43 @@ public class Main {
         Connector connector = new Connector();
 
         TestInitializator.init();
-        User user = new User();
-        user.setUserName("ded");
-        user.setFirstName("Lox");
-        user.setLastName("Barzov");
-        user.setTelephone("123456780");
-        user.setDiscount(0);
-        user.setPassword("root");
-        user.setRole(Role.TOUR_AGENT.toString());
-        UserDaoImpl userDao = new UserDaoImpl();
-        Connection connection = null;
+//        User user = new User();
+//        user.setUserName("ded");
+//        user.setFirstName("Lox");
+//        user.setLastName("Barzov");
+//        user.setTelephone("123456780");
+//        user.setDiscount(0);
+//        user.setPassword("root");
+//        user.setRole(Role.TOUR_AGENT.toString());
+//        UserDaoImpl userDao = new UserDaoImpl();
 
+        Tour tour = new Tour();
+        tour.setTitle("Russian tour");
+        tour.setDescription("Best tour");
+        tour.setType(TourType.SHOPPING.toString());
+        tour.setHot(true);
+        tour.setPrice(new BigDecimal(1500));
+        tour.setEnabled(true);
+        tour.setAvgRating(4.5);
+        tour.setVotesCount(0);
+        tour.setDiscount(5);
+        tour.setDestination("Turkey");
+
+        TourDaoImpl tourDao = new TourDaoImpl();
+        Connection connection = null;
 
         try {
             connection = Connector.getConnection();
-            userDao.setConnection(connection);
-            UserServiceImpl userService = new UserServiceImpl();
-            userService.setUserDao(userDao);
-            user.setId(Long.parseLong("2"));
-            System.out.println(userService.findAll());
-            userDao.update(user);
-            user.setId(Long.valueOf(2));
+            tourDao.setConnection(connection);
 
-            System.out.println(userService.findById(Long.parseLong("2")));
+            tourDao.delete(Long.parseLong("1"));
+            System.out.println(tourDao.readAll());
+            tourDao.create(tour);
+            System.out.println(tourDao.read(Long.parseLong("2")));
 
-        } catch (SQLException | ServiceException | DaoException e) {
+            //System.out.println(userService.findById(Long.parseLong("2")));
+
+        } catch (SQLException | DaoException e) {
             e.printStackTrace();
         } /*catch (DaoException e) {
             e.printStackTrace();
