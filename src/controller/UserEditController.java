@@ -1,7 +1,6 @@
 package controller;
 
 import dao.mysql.UserDaoImpl;
-import domain.Role;
 import domain.User;
 import service.ServiceException;
 import service.logic.UserServiceImpl;
@@ -17,34 +16,34 @@ import java.sql.SQLException;
 
 public class UserEditController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = null;
         try {
-            id = Long.parseLong(request.getParameter("id"));
+            id = Long.parseLong(req.getParameter("id"));
         } catch (NumberFormatException e) {
-            // TO DO LOGGER
         }
         if (id != null) {
             Connection connection = null;
             try {
                 connection = Connector.getConnection();
-                UserDaoImpl userDao = new UserDaoImpl();
-                userDao.setConnection(connection);
+                UserDaoImpl dao = new UserDaoImpl();
+                dao.setConnection(connection);
                 UserServiceImpl service = new UserServiceImpl();
-                service.setUserDao(userDao);
+                service.setUserDao(dao);
                 User user = service.findById(id);
-                request.setAttribute("user", user);
-            } catch (SQLException | ServiceException e) {
+                req.setAttribute("user", user);
+                req.setAttribute("role", user.getRole());
+            } catch (SQLException e) {
                 throw new ServletException(e);
+            } catch (ServiceException e) {
+                e.printStackTrace();
             } finally {
                 try {
                     connection.close();
                 } catch (Exception e) {
-
                 }
             }
         }
-        request.setAttribute("roles", Role.values());
-        request.getRequestDispatcher("WEB-INF/jsp/user/edit.jsp").forward(request, response);
+        req.getRequestDispatcher("/WEB-INF/jsp/user/edit.jsp").forward(req, resp);
     }
 }

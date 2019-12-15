@@ -22,7 +22,7 @@ public class Main {
         user.setTelephone("123456780");
         user.setDiscount(0);
         user.setPassword("root");
-        user.setRole(Role.CUSTOMER.toString());
+        user.setRole(Role.TOUR_AGENT.toString());
         UserDaoImpl userDao = new UserDaoImpl();
         Connection connection = null;
 
@@ -32,12 +32,14 @@ public class Main {
             userDao.setConnection(connection);
             UserServiceImpl userService = new UserServiceImpl();
             userService.setUserDao(userDao);
+            user.setId(Long.parseLong("2"));
             System.out.println(userService.findAll());
+            userDao.update(user);
             user.setId(Long.valueOf(2));
 
             System.out.println(userService.findById(Long.parseLong("2")));
 
-        } catch (SQLException | ServiceException e) {
+        } catch (SQLException | ServiceException | DaoException e) {
             e.printStackTrace();
         } /*catch (DaoException e) {
             e.printStackTrace();

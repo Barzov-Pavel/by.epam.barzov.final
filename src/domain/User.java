@@ -1,6 +1,8 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -82,6 +84,18 @@ public class User implements Serializable {
 
     public void setTelephone(String telephone) {
         this.telephone = telephone;
+    }
+
+    /*
+    Get List of roles
+     */
+    public List<String> getRoles() {
+        List<String> roles = new ArrayList<>();
+        Role[] roles1 = Role.values();
+        for (int i = 0; i < roles1.length; i++) {
+            roles.add(roles1[i].toString());
+        }
+        return roles;
     }
 
     @Override

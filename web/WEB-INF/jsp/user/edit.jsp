@@ -1,6 +1,6 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <c:if test="${empty user}">
     <jsp:useBean id="user" class="domain.User"/>
@@ -18,7 +18,7 @@
 <head>
     <meta charset="UTF-8">
     <title>${title}</title>
-    <c:url var="urlCss" value="/main.css"/>
+    <c:url var="urlCss" value="../main.css"/>
     <link href="${urlCss}" rel="stylesheet">
 </head>
 <body>
@@ -31,19 +31,19 @@
         <input name="id" value="${user.id}" type="hidden">
     </c:if>
     <label for="login">Имя пользователя:</label>
-    <input id="login" name="login" value="${user.login}">
+    <input id="login" name="login" value="${user.userName}">
     <label for="role">Роль:</label>
     <select id="role" name="role">
-        <c:forEach var="role" items="${roles}">
+        <c:forEach var="role" items="${user.roles}">
             <c:choose>
-                <c:when test="${role.id == user.role.id}">
+                <c:when test="${role == user.role}">
                     <c:set var="selected" value="selected"/>
                 </c:when>
                 <c:otherwise>
                     <c:remove var="selected"/>
                 </c:otherwise>
             </c:choose>
-            <option value="${role.id}" ${selected}>${role.name}</option>
+            <option value="${role}" ${selected}>${role}</option>
         </c:forEach>
     </select>
     <button class="save">Сохранить</button>

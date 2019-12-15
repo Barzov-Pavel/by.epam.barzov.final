@@ -21,12 +21,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>UserEditController</servlet-name>
+        <servlet-name>edit</servlet-name>
         <servlet-class>controller.UserEditController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>UserEditController</servlet-name>
+        <servlet-name>edit</servlet-name>
         <url-pattern>/user/edit.html</url-pattern>
     </servlet-mapping>
 

@@ -24,7 +24,7 @@
             <td class="content">${user.userName}</td>
             <td class="content">${user.role}</td>
             <td class="empty">
-                <c:url var="urlUserEdit" value="edit.jsp">
+                <c:url var="urlUserEdit" value="/user/edit.html">
                     <c:param name="id" value="${user.id}"/>
                 </c:url>
                 <a href="${urlUserEdit}" class="edit"></a>
@@ -32,7 +32,7 @@
         </tr>
     </c:forEach>
 </table>
-<c:url var="urlUserEdit" value="edit.jsp"/>
+<c:url var="urlUserEdit" value="/user/edit.html"/>
 <a href="${urlUserEdit}" class="add-button">Добавить</a>
 </body>
 </html>
