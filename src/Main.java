@@ -1,18 +1,18 @@
 import dao.Dao;
 import dao.DaoException;
+import dao.mysql.PurchaseDaoImpl;
 import dao.mysql.TourDaoImpl;
 import dao.mysql.UserDaoImpl;
-import domain.Role;
-import domain.Tour;
-import domain.TourType;
-import domain.User;
+import domain.*;
 import service.ServiceException;
 import service.logic.UserServiceImpl;
 import util.Connector;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 
 public class Main {
     public static void main(String[] args) {
@@ -27,36 +27,39 @@ public class Main {
         user.setDiscount(0);
         user.setPassword("root");
         user.setRole(Role.TOUR_AGENT.toString());
+        user.setId(Long.parseLong("1"));
         UserDaoImpl userDao = new UserDaoImpl();
 
-//        Tour tour = new Tour();
-//        tour.setTitle("Russian tour");
-//        tour.setDescription("Best tour");
-//        tour.setType(TourType.SHOPPING.toString());
-//        tour.setHot(true);
-//        tour.setPrice(new BigDecimal(1500));
-//        tour.setEnabled(true);
-//        tour.setAvgRating(4.5);
-//        tour.setVotesCount(0);
-//        tour.setDiscount(5);
-//        tour.setDestination("Turkey");
-//
+        Tour tour = new Tour();
+        tour.setTitle("Russian tour");
+        tour.setDescription("Best tour");
+        tour.setType(TourType.SHOPPING.toString());
+        tour.setHot(true);
+        tour.setPrice(new BigDecimal(1500));
+        tour.setEnabled(true);
+        tour.setAvgRating(4.5);
+        tour.setVotesCount(0);
+        tour.setDiscount(5);
+        tour.setDestination("Turkey");
+        tour.setId(Long.parseLong("3"));
+
+        Purchase purchase = new Purchase();
+        purchase.setTour(tour);
+        purchase.setUser(user);
+        purchase.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+        purchase.setPrice(tour.getPrice());
+        purchase.setStatus(PurchaseStatus.CANCELED.toString());
+
         TourDaoImpl tourDao = new TourDaoImpl();
+        PurchaseDaoImpl purchaseDao = new PurchaseDaoImpl();
         Connection connection = null;
 
         try {
             connection = Connector.getConnection();
-            userDao.setConnection(connection);
+            purchaseDao.setConnection(connection);
 
-
-            System.out.println(userDao.readAll());
-            tourDao.setConnection(connection);
-            System.out.println(tourDao.readAll());
-           // userDao.create(user);
-            //System.out.println(userDao.read(Long.parseLong("2")));
-
-
-            //System.out.println(userService.findById(Long.parseLong("2")));
+            purchase.setId(purchaseDao.create(purchase));
+            System.out.println(purchaseDao.readAll());
 
         } catch (SQLException | DaoException e) {
             e.printStackTrace();

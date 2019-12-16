@@ -2,7 +2,7 @@ package domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 public class Purchase implements Serializable {
@@ -11,7 +11,7 @@ public class Purchase implements Serializable {
     private Tour tour;
     private Date date;
     private BigDecimal price;
-    private PurchaseStatus status;
+    private String status;
 
     public Purchase() {
     }
@@ -60,11 +60,11 @@ public class Purchase implements Serializable {
         this.price = price;
     }
 
-    public PurchaseStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(PurchaseStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
