@@ -90,7 +90,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             statement = getConnection().createStatement();
             resultSet = statement.executeQuery(sql);
             List<User> users = new ArrayList<>();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 User user = new User();
                 user.setId(resultSet.getLong("id"));
                 user.setUserName(resultSet.getString("username"));

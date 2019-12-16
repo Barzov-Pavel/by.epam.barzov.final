@@ -2,6 +2,8 @@ package domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Tour implements Serializable {
@@ -110,6 +112,15 @@ public class Tour implements Serializable {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public List<String> getTypesTour() {
+        List<String> types = new ArrayList<>();
+        TourType[] types1 = TourType.values();
+        for (int i = 0; i < types1.length; i++) {
+            types.add(types1[i].toString());
+        }
+        return types;
     }
 
     @Override

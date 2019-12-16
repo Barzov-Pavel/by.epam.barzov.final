@@ -101,7 +101,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             statement = getConnection().createStatement();
             resultSet = statement.executeQuery(sql);
             List<Tour> tours = new ArrayList<>();
-            if (resultSet.next()) {
+            while (resultSet.next()) {
                 Tour tour = new Tour();
                 tour.setId(resultSet.getLong("id"));
                 tour.setTitle(resultSet.getString("title"));

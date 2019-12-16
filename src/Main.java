@@ -19,39 +19,42 @@ public class Main {
         Connector connector = new Connector();
 
         TestInitializator.init();
-//        User user = new User();
-//        user.setUserName("ded");
-//        user.setFirstName("Lox");
-//        user.setLastName("Barzov");
-//        user.setTelephone("123456780");
-//        user.setDiscount(0);
-//        user.setPassword("root");
-//        user.setRole(Role.TOUR_AGENT.toString());
-//        UserDaoImpl userDao = new UserDaoImpl();
+        User user = new User();
+        user.setUserName("ded");
+        user.setFirstName("Lox");
+        user.setLastName("Barzov");
+        user.setTelephone("123456780");
+        user.setDiscount(0);
+        user.setPassword("root");
+        user.setRole(Role.TOUR_AGENT.toString());
+        UserDaoImpl userDao = new UserDaoImpl();
 
-        Tour tour = new Tour();
-        tour.setTitle("Russian tour");
-        tour.setDescription("Best tour");
-        tour.setType(TourType.SHOPPING.toString());
-        tour.setHot(true);
-        tour.setPrice(new BigDecimal(1500));
-        tour.setEnabled(true);
-        tour.setAvgRating(4.5);
-        tour.setVotesCount(0);
-        tour.setDiscount(5);
-        tour.setDestination("Turkey");
-
+//        Tour tour = new Tour();
+//        tour.setTitle("Russian tour");
+//        tour.setDescription("Best tour");
+//        tour.setType(TourType.SHOPPING.toString());
+//        tour.setHot(true);
+//        tour.setPrice(new BigDecimal(1500));
+//        tour.setEnabled(true);
+//        tour.setAvgRating(4.5);
+//        tour.setVotesCount(0);
+//        tour.setDiscount(5);
+//        tour.setDestination("Turkey");
+//
         TourDaoImpl tourDao = new TourDaoImpl();
         Connection connection = null;
 
         try {
             connection = Connector.getConnection();
-            tourDao.setConnection(connection);
+            userDao.setConnection(connection);
 
-            tourDao.delete(Long.parseLong("1"));
+
+            System.out.println(userDao.readAll());
+            tourDao.setConnection(connection);
             System.out.println(tourDao.readAll());
-            tourDao.create(tour);
-            System.out.println(tourDao.read(Long.parseLong("2")));
+           // userDao.create(user);
+            //System.out.println(userDao.read(Long.parseLong("2")));
+
 
             //System.out.println(userService.findById(Long.parseLong("2")));
 

@@ -40,6 +40,26 @@
         <url-pattern>/user/save.html</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>TourListController</servlet-name>
+        <servlet-class>controller.TourListController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>TourListController</servlet-name>
+        <url-pattern>/user/tour-list.html</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>tour-edit</servlet-name>
+        <servlet-class>controller.TourEditController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>tour-edit</servlet-name>
+        <url-pattern>/user/tour-edit.html</url-pattern>
+    </servlet-mapping>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
