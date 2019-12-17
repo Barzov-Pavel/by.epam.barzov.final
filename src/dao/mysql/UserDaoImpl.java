@@ -118,7 +118,6 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
 
-
     @Override
     public void update(User user) throws DaoException {
         String sql = "UPDATE `user` SET `username`=?, `firstName`=?," +
@@ -132,7 +131,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             statement.setString(4, user.getPassword());
             statement.setInt(5, user.getDiscount());
             statement.setString(6, user.getTelephone());
-            statement.setString(7,user.getRole());
+            statement.setString(7, user.getRole());
             statement.setLong(8, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -237,7 +236,20 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean isUserInitiatesTransfers(Long id) throws DaoException {
+    public boolean isUserBoughtTour(Long id) throws DaoException {
+        String sql = "SELECT * FROM `purchase` WHERE user_id=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
+            statement.setLong(1, id);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
         return false;
     }
 }

@@ -43,6 +43,17 @@
         <url-pattern>/user/save.html</url-pattern>
     </servlet-mapping>
 
+    <!-- CONTROLLER:UserDeleteController -->
+    <servlet>
+        <servlet-name>UserDeleteController</servlet-name>
+        <servlet-class>controller.UserDeleteController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>UserDeleteController</servlet-name>
+        <url-pattern>/user/delete.html</url-pattern>
+    </servlet-mapping>
+
     <!-- CONTROLLER:TourListController -->
     <servlet>
         <servlet-name>TourListController</servlet-name>

@@ -1,7 +1,6 @@
 package controller;
 
 import dao.mysql.UserDaoImpl;
-import domain.User;
 import service.ServiceException;
 import service.logic.UserServiceImpl;
 import util.Connector;
@@ -14,9 +13,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-public class UserEditController extends HttpServlet {
+public class UserDeleteController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = null;
         try {
             id = Long.parseLong(req.getParameter("id"));
@@ -30,15 +29,9 @@ public class UserEditController extends HttpServlet {
                 dao.setConnection(connection);
                 UserServiceImpl service = new UserServiceImpl();
                 service.setUserDao(dao);
-                User user = service.findById(id);
-                req.setAttribute("user", user);
-                req.setAttribute("role", user.getRole());
-                boolean userCanBeDeleted = service.canDelete(id);
-                req.setAttribute("userCanBeDeleted", userCanBeDeleted);
-            } catch (SQLException e) {
+                service.delete(id);
+            } catch (SQLException | ServiceException e) {
                 throw new ServletException(e);
-            } catch (ServiceException e) {
-                e.printStackTrace();
             } finally {
                 try {
                     connection.close();
@@ -46,6 +39,6 @@ public class UserEditController extends HttpServlet {
                 }
             }
         }
-        req.getRequestDispatcher("/WEB-INF/jsp/user/edit.jsp").forward(req, resp);
+        resp.sendRedirect(req.getContextPath() + "/user/list.html");
     }
 }

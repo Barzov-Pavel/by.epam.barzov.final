@@ -69,7 +69,7 @@ form button.save {
 }
 
 form button.delete {
-    background: #C40 url('delete.png') no-repeat;
+    background: #cc5126 url('delete.png') no-repeat;
 }
 
 form button.reset {

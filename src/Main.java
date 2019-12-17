@@ -21,47 +21,47 @@ public class Main {
 
         TestInitializator.init();
         User user = new User();
-        user.setUserName("ded");
-        user.setFirstName("Lox");
-        user.setLastName("Barzov");
-        user.setTelephone("123456780");
+        user.setUserName("bob");
+        user.setFirstName("Bob");
+        user.setLastName("Palmer");
+        user.setTelephone("32146987");
         user.setDiscount(0);
         user.setPassword("root");
-        user.setRole(Role.TOUR_AGENT.toString());
-        user.setId(Long.parseLong("1"));
+        user.setRole(Role.CUSTOMER.toString());
         UserDaoImpl userDao = new UserDaoImpl();
-
-        Tour tour = new Tour();
-        tour.setTitle("Russian tour");
-        tour.setDescription("Best tour");
-        tour.setType(TourType.SHOPPING.toString());
-        tour.setHot(true);
-        tour.setPrice(new BigDecimal(1500));
-        tour.setEnabled(true);
-        tour.setAvgRating(4.5);
-        tour.setVotesCount(0);
-        tour.setDiscount(5);
-        tour.setDestination("Turkey");
-        tour.setId(Long.parseLong("3"));
-
-        Purchase purchase = new Purchase();
-        purchase.setTour(tour);
-        purchase.setUser(user);
-        purchase.setDate(new Date(Calendar.getInstance().getTime().getTime()));
-        purchase.setPrice(tour.getPrice());
-        purchase.setStatus(PurchaseStatus.CANCELED.toString());
-
-        TourDaoImpl tourDao = new TourDaoImpl();
-        PurchaseDaoImpl purchaseDao = new PurchaseDaoImpl();
+//
+//        Tour tour = new Tour();
+//        tour.setTitle("Russian tour");
+//        tour.setDescription("Best tour");
+//        tour.setType(TourType.SHOPPING.toString());
+//        tour.setHot(true);
+//        tour.setPrice(new BigDecimal(1500));
+//        tour.setEnabled(true);
+//        tour.setAvgRating(4.5);
+//        tour.setVotesCount(0);
+//        tour.setDiscount(5);
+//        tour.setDestination("Turkey");
+//        tour.setId(Long.parseLong("3"));
+//
+//        Purchase purchase = new Purchase();
+//        purchase.setTour(tour);
+//        purchase.setUser(user);
+//        purchase.setDate(new Date(Calendar.getInstance().getTime().getTime()));
+//        purchase.setPrice(tour.getPrice());
+//        purchase.setStatus(PurchaseStatus.CANCELED.toString());
+//
+//        TourDaoImpl tourDao = new TourDaoImpl();
+//        PurchaseDaoImpl purchaseDao = new PurchaseDaoImpl();
         Connection connection = null;
 
 
         try {
             connection = Connector.getConnection();
-            purchaseDao.setConnection(connection);
+            userDao.setConnection(connection);
+            UserServiceImpl service = new UserServiceImpl();
+            service.setUserDao(userDao);
+            userDao.create(user);
 
-            purchase.setId(purchaseDao.create(purchase));
-            System.out.println(purchaseDao.readAll());
 
         } catch (SQLException | DaoException e) {
             e.printStackTrace();

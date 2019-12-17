@@ -26,6 +26,7 @@
 <h2>${title}</h2>
 <c:url var="urlUserList" value="/user/list.html"/>
 <c:url var="urlUserSave" value="/user/save.html"/>
+<c:url var="urlUserDelete" value="/user/delete.html"/>
 <form action="${urlUserSave}" method="post">
     <c:if test="${not empty user.id}">
         <input name="id" value="${user.id}" type="hidden">
@@ -46,7 +47,13 @@
             <option value="${role}" ${selected}>${role}</option>
         </c:forEach>
     </select>
-    <button class="save" formaction="${urlUserSave}">Сохранить</button>
+    <button class="save" formaction="${urlUserSave}" formmethod="post">Сохранить</button>
+    <c:if test="${not empty user.id}">
+        <c:if test="${not userCanBeDeleted}">
+            <c:set var="disabled" value="disabled"/>
+        </c:if>
+        <button class="delete" formaction="${urlUserDelete}" formmethod="post" ${disabled}>Удалить</button>
+    </c:if>
     <button class="reset" type="reset">Сброс</button>
     <button class="back" formaction="${urlUserList}" formmethod="get">Отмена</button>
 </form>

@@ -128,7 +128,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public boolean canDelete(Long id) throws ServiceException {
         try {
-            return !userDao.isUserInitiatesTransfers(id);
+            return !userDao.isUserBoughtTour(id);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

@@ -10,7 +10,7 @@ public interface UserDao extends Dao<User> {
 
     User readByLoginAndPassword(String login, String password) throws DaoException;
 
-    boolean isUserInitiatesTransfers(Long id) throws DaoException;
+    boolean isUserBoughtTour(Long id) throws DaoException;
 //    void addRoles(Long userId, List<Role> roles);
 //
 //    void addRole(Long userId, Role role);
