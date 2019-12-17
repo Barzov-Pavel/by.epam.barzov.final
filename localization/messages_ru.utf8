@@ -1,0 +1,36 @@
+application.title=Тур агенство "Путь в EPAM"
+
+user.list.title=Список пользователей
+user.list.table.login=Имя пользователя
+user.list.table.role=Роль
+user.list.button.add=Добавить
+
+user.edit.title.edit=Редактирование данных пользователя
+user.edit.title.add=Добавление нового пользователя
+user.edit.form.login=Имя пользователя
+user.edit.form.role=Роль
+user.edit.button.save=Сохранить
+user.edit.button.delete=Удалить
+user.edit.button.reset=Сброс
+user.edit.button.cancel=Отмена
+
+tour.list.title=Список туров
+tour.list.table.name=Наименование тура
+tour.list.table.info=Описание тура
+tour.list.table.type=Тип тура
+tour.list.table.price=Стоимость тура
+tour.list.table.enabled=Доступность к заказу
+tour.list.table.rating=Средний рейтинг
+tour.button=Добавить
+
+tour.edit.edit=Редактирование информации о туре
+tour.edit.add=Добавление нового тура
+tour.edit.form.name=Наименование тура:
+tour.edit.form.description=Описание тура:
+tour.edit.form.type=Тип тура:
+tour.edit.form.price=Стоимость тура:
+tour.edit.form.enabled=Доступность тура к заказу:
+tour.edit.form.rating=Средний рейтинг тура:
+tour.edit.button.save=Сохранить
+tour.edit.button.reset=Сброс
+tour.edit.button.cancel=Отмена
