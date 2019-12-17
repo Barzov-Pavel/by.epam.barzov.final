@@ -10,6 +10,7 @@
 
     <display-name>Турагенство путь в EPAM</display-name>
 
+    <!-- CONTROLLER:UserListController -->
     <servlet>
         <servlet-name>UserListController</servlet-name>
         <servlet-class>controller.UserListController</servlet-class>
@@ -20,6 +21,7 @@
         <url-pattern>/user/list.html</url-pattern>
     </servlet-mapping>
 
+    <!-- CONTROLLER:UserEditController -->
     <servlet>
         <servlet-name>edit</servlet-name>
         <servlet-class>controller.UserEditController</servlet-class>
@@ -30,6 +32,7 @@
         <url-pattern>/user/edit.html</url-pattern>
     </servlet-mapping>
 
+    <!-- CONTROLLER:UserSaveController -->
     <servlet>
         <servlet-name>UserSaveController</servlet-name>
         <servlet-class>controller.UserSaveController</servlet-class>
@@ -40,6 +43,7 @@
         <url-pattern>/user/save.html</url-pattern>
     </servlet-mapping>
 
+    <!-- CONTROLLER:TourListController -->
     <servlet>
         <servlet-name>TourListController</servlet-name>
         <servlet-class>controller.TourListController</servlet-class>
@@ -50,6 +54,7 @@
         <url-pattern>/user/tour-list.html</url-pattern>
     </servlet-mapping>
 
+    <!-- CONTROLLER:TourEditController -->
     <servlet>
         <servlet-name>tour-edit</servlet-name>
         <servlet-class>controller.TourEditController</servlet-class>

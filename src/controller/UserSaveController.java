@@ -20,6 +20,7 @@ public class UserSaveController extends HttpServlet {
         User user = new User();
         try {
             user.setId(Long.parseLong(request.getParameter("id")));
+            user.setRole(request.getParameter("role"));
         } catch (NumberFormatException e) {
             // TO LOGGER
         }

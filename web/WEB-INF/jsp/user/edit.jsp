@@ -46,7 +46,7 @@
             <option value="${role}" ${selected}>${role}</option>
         </c:forEach>
     </select>
-    <button class="save">Сохранить</button>
+    <button class="save" formaction="${urlUserSave}">Сохранить</button>
     <button class="reset" type="reset">Сброс</button>
     <button class="back" formaction="${urlUserList}" formmethod="get">Отмена</button>
 </form>
