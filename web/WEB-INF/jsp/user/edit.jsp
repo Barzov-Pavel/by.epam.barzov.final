@@ -25,6 +25,16 @@
         </c:if>
         <label for="login"><fmt:message key="user.edit.form.login"/></label>
         <input id="login" name="login" value="${user.userName}">
+        <label for="firstName"><fmt:message key="user.edit.table.firstName"/></label>
+        <input id="firstName" name="firstName" value="${user.firstName}">
+        <label for="lastName"><fmt:message key="user.edit.table.lastName"/></label>
+        <input id="lastName" name="lastName" value="${user.lastName}">
+        <label for="password"><fmt:message key="user.edit.table.password"/></label>
+        <input id="password" name="password" value="${user.password}">
+        <label for="discount"><fmt:message key="user.edit.table.discount"/></label>
+        <input id="discount" name="discount" value="${user.discount}">
+        <label for="phone"><fmt:message key="user.edit.table.phone"/></label>
+        <input id="phone" name="phone" value="${user.telephone}">
         <label for="role"><fmt:message key="user.edit.form.role"/></label>
         <select id="role" name="role">
             <c:forEach var="role" items="${user.roles}">
@@ -39,7 +49,7 @@
                 <option value="${role}" ${selected}>${role}</option>
             </c:forEach>
         </select>
-        <button class="save" formaction="${urlUserSave}" formmethod="post"><fmt:message key="user.edit.button.save"/></button>
+        <button class="save"><fmt:message key="user.edit.button.save"/></button>
         <c:if test="${not empty user.id}">
             <c:if test="${not userCanBeDeleted}">
                 <c:set var="disabled" value="disabled"/>

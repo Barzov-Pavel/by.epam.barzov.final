@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -20,9 +21,19 @@ public class UserSaveController extends HttpServlet {
         User user = new User();
         try {
             user.setId(Long.parseLong(request.getParameter("id")));
-            user.setRole(request.getParameter("role"));
         } catch (NumberFormatException e) {
             // TO LOGGER
+        }
+        try {
+            user.setUserName(request.getParameter("login"));
+            user.setFirstName(request.getParameter("firstName"));
+            user.setLastName(request.getParameter("lastName"));
+            user.setPassword(request.getParameter("password"));
+            user.setDiscount(Integer.parseInt(request.getParameter("discount")));
+            user.setTelephone(request.getParameter("phone"));
+            user.setRole(request.getParameter("role"));
+        } catch (NumberFormatException e) {
+
         }
         if (user.getUserName() != null && user.getRole() != null) {
             Connection connection = null;

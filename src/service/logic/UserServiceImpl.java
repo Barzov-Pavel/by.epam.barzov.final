@@ -53,7 +53,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public void save(User user) throws ServiceException {
         try {
-            getTransaction().start();
+//            getTransaction().start();
             if (user.getId() != null) {
                 User storedUser = userDao.read(user.getId());
                 if (storedUser != null) {
@@ -67,7 +67,6 @@ public class UserServiceImpl extends BaseService implements UserService {
                     throw new UserNotExistsException(user.getId());
                 }
             } else {
-                user.setPassword(defaultPassword);
                 if (userDao.readByLogin(user.getUserName()) == null) {
                     Long id = userDao.create(user);
                     user.setId(id);
@@ -75,12 +74,12 @@ public class UserServiceImpl extends BaseService implements UserService {
                     throw new UserLoginNotUniqueException(user.getUserName());
                 }
             }
-            getTransaction().commit();
+//            getTransaction().commit();
         } catch (DaoException e) {
-            try {
-                getTransaction().rollback();
-            } catch (ServiceException e1) {
-            }
+//            try {
+////                getTransaction().rollback();
+//            } catch (ServiceException e1) {
+//            }
             throw new ServiceException(e);
         } catch (ServiceException e) {
             try {
