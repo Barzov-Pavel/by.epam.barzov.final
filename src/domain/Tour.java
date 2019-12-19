@@ -14,10 +14,10 @@ public class Tour implements Serializable {
     private String type;
     private boolean hot;
     private BigDecimal price;
-    private boolean enabled;
+    private boolean enabled = true;
     private Double avgRating;
-    private int votesCount;
-    private int discount;
+    private int votesCount = 0;
+    private int discount = 0;
 
     public Tour() {
     }

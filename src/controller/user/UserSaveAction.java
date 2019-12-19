@@ -1,5 +1,7 @@
-package controller;
+package controller.user;
 
+import controller.Action;
+import controller.Forward;
 import domain.User;
 import service.ServiceException;
 import service.UserService;

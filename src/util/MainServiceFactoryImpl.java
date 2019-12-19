@@ -1,8 +1,12 @@
 package util;
 
+import dao.TourDao;
 import dao.UserDao;
+import dao.mysql.TourDaoImpl;
 import dao.mysql.UserDaoImpl;
+import service.TourService;
 import service.UserService;
+import service.logic.TourServiceImpl;
 import service.logic.UserServiceImpl;
 
 import java.sql.Connection;
@@ -24,6 +28,20 @@ public class MainServiceFactoryImpl implements ServiceFactory {
         UserDaoImpl userDao = new UserDaoImpl();
         userDao.setConnection(getConnection());
         return userDao;
+    }
+
+    @Override
+    public TourService getTourService() throws FactoryException {
+        TourServiceImpl tourService = new TourServiceImpl();
+        tourService.setTourDao(getTourDao());
+        return tourService;
+    }
+
+    @Override
+    public TourDao getTourDao() throws FactoryException {
+        TourDaoImpl tourDao = new TourDaoImpl();
+        tourDao.setConnection(getConnection());
+        return tourDao;
     }
 
     @Override

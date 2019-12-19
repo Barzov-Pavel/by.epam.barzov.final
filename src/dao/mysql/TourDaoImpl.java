@@ -178,4 +178,22 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             }
         }
     }
+
+    @Override
+    public boolean isTourWasBought(Long id) throws DaoException {
+        String sql = "SELECT * FROM `purchase` WHERE tour_id=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
+            statement.setLong(1, id);
+            resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+        return false;
+    }
 }

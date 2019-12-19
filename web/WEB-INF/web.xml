@@ -22,28 +22,6 @@
         <url-pattern>*.html</url-pattern>
     </servlet-mapping>
 
-    <!-- CONTROLLER:TourListController -->
-    <servlet>
-        <servlet-name>TourListController</servlet-name>
-        <servlet-class>controller.TourListController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>TourListController</servlet-name>
-        <url-pattern>/user/tour-list.html</url-pattern>
-    </servlet-mapping>
-
-    <!-- CONTROLLER:TourEditController -->
-    <servlet>
-        <servlet-name>tour-edit</servlet-name>
-        <servlet-class>controller.TourEditController</servlet-class>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>tour-edit</servlet-name>
-        <url-pattern>/user/tour-edit.html</url-pattern>
-    </servlet-mapping>
-
     <!-- Internationalization -->
     <context-param>
         <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>

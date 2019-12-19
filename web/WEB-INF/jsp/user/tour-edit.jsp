@@ -17,6 +17,7 @@
 <u:html title="${title}">
     <h2>${title}</h2>
     <c:url var="urlTourList" value="/user/tour-list.html"/>
+    <c:url var="urlTourDelete" value="/user/tour-delete.html"/>
     <c:url var="urlTourSave" value="/user/tour-save.html"/>
     <form action="${urlTourSave}" method="post">
         <c:if test="${not empty tour.id}">
@@ -48,8 +49,16 @@
         <input id="enabled" name="enabled" value="${tour.enabled}">
         <label for="rating"><fmt:message key="tour.edit.form.rating"/></label>
         <input id="rating" name="rating" value="${tour.avgRating}">
+        <label for="destination"><fmt:message key="tour.edit.form.destination"/></label>
+        <input id="destination" name="destination" value="${tour.destination}">
 
         <button class="save"><fmt:message key="tour.edit.button.save"/></button>
+        <c:if test="${not empty tour.id}">
+            <c:if test="${not tourCanBeDeleted}">
+                <c:set var="disabled" value="disabled"/>
+            </c:if>
+            <button class="delete" formaction="${urlTourDelete}" formmethod="post" ${disabled}><fmt:message key="tour.edit.button.delete"/></button>
+        </c:if>
         <button class="reset" type="reset"><fmt:message key="tour.edit.button.reset"/></button>
         <button class="back" formaction="${urlTourList}" formmethod="get"><fmt:message key="tour.edit.button.cancel"/></button>
     </form>
