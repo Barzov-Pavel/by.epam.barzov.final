@@ -20,7 +20,7 @@ public class UserListController extends HttpServlet {
     @Override
     public void init() throws ServletException {
         try {
-            Connector.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/new_schema",
+            Connector.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/new_schema?useUnicode=true&characterEncoding=utf8",
                     "root", "");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

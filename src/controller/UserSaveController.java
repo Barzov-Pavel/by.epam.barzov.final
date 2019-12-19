@@ -18,6 +18,7 @@ import java.sql.SQLException;
 public class UserSaveController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         User user = new User();
         try {
             user.setId(Long.parseLong(request.getParameter("id")));
@@ -32,6 +33,17 @@ public class UserSaveController extends HttpServlet {
             user.setDiscount(Integer.parseInt(request.getParameter("discount")));
             user.setTelephone(request.getParameter("phone"));
             user.setRole(request.getParameter("role"));
+            PrintWriter writer = response.getWriter();
+//            writer.println("<!DOCTYPE html>");
+//            writer.println("<html>");
+//            writer.println("<head>");
+//            writer.println("<meta charset=\"UTF-8\">");
+//            writer.println("</head>");
+//            writer.println("<body>");
+//            writer.println(request.getParameter("lastName"));
+//            writer.println("/<body>");
+//            writer.println("</html>");
+
         } catch (NumberFormatException e) {
 
         }
@@ -39,16 +51,19 @@ public class UserSaveController extends HttpServlet {
             Connection connection = null;
             try {
                 connection = Connector.getConnection();
+                connection.setAutoCommit(false);
                 UserDaoImpl dao = new UserDaoImpl();
                 dao.setConnection(connection);
                 UserServiceImpl service = new UserServiceImpl();
                 service.setUserDao(dao);
                 service.setDefaultPassword("12345");
                 service.save(user);
+                connection.commit();
             } catch (SQLException | ServiceException e) {
                 throw new ServletException(e);
             } finally {
                 try {
+                    connection.rollback();
                     connection.close();
                 } catch (Exception e) {
 

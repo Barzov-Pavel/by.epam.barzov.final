@@ -16,6 +16,7 @@ import java.sql.SQLException;
 public class UserDeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         Long id = null;
         try {
             id = Long.parseLong(req.getParameter("id"));

@@ -22,8 +22,8 @@ public class Main {
         TestInitializator.init();
         User user = new User();
         user.setUserName("bob");
-        user.setFirstName("Bob");
-        user.setLastName("Palmer");
+        user.setFirstName("Боб");
+        user.setLastName("Палмер");
         user.setTelephone("32146987");
         user.setDiscount(0);
         user.setPassword("root");
