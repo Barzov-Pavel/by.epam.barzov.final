@@ -84,3 +84,17 @@ form button.reset {
 form button.back {
     background: #4BC4CC url('back.png') no-repeat;
 }
+
+form button.login {
+    background: #0C4;
+    padding: 0 32px 0 32px;
+}
+
+p.error {
+    width: 410px;
+    background: #C44;
+    border: 1px solid #400;
+    padding: 5px 20px;
+    margin: 0 20px;
+    color: #400;
+}

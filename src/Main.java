@@ -59,7 +59,9 @@ public class Main {
             userDao.setConnection(connection);
             UserServiceImpl service = new UserServiceImpl();
             service.setUserDao(userDao);
-            userDao.create(user);
+            user = userDao.readByLoginAndPassword("ded", "root");
+
+            System.out.println(user);
 
 
         } catch (SQLException | DaoException e) {

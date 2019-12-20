@@ -200,7 +200,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
     @Override
     public User readByLoginAndPassword(String login, String password) throws DaoException {
-        String sql = "SELECT * FROM `user` WHERE username=?, password=?";
+        String sql = "SELECT * FROM `user` WHERE username=? and password=?";
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         try {

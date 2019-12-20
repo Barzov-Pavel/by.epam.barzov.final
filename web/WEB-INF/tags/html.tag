@@ -1,7 +1,7 @@
 <%@tag language="java" pageEncoding="UTF-8" %>
 <%@attribute name="title" required="true" rtexprvalue="true" type="java.lang.String" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -12,8 +12,12 @@
     <link href="${urlCss}" rel="stylesheet">
 </head>
 <body>
-<fmt:message key="application.title" var="appTitle"/>
-<h1>${appTitle}</h1>
+<h1><fmt:message key="application.title"/></h1>
+<c:if test="${not empty currentUser}">
+    <c:url var="urlLogout" value="/logout.html"/>
+    <p><fmt:message key="application.welcome"/> ${currentUser.userName} (${currentUser.role}).
+        <a href="${urlLogout}"><fmt:message key="application.button.logout"/></a></p>
+</c:if>
 <jsp:doBody/>
 </body>
 </html>
