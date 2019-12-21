@@ -5,7 +5,6 @@ import controller.Forward;
 import domain.Tour;
 import service.ServiceException;
 import service.TourService;
-import service.UserService;
 import util.FactoryException;
 
 import javax.servlet.ServletException;

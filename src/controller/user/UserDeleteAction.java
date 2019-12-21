@@ -11,7 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import org.apache.logging.log4j.*;
+
 public class UserDeleteAction extends Action {
+    private static final Logger LOGGER = LogManager.getLogger(UserDeleteAction.class);
+
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = null;
@@ -25,6 +29,7 @@ public class UserDeleteAction extends Action {
                 UserService service = getServiceFactory().getUserService();
                 service.delete(id);
             } catch (FactoryException | ServiceException e) {
+                LOGGER.error("Don't delete user" + e.getMessage());
                 throw new ServletException(e);
             }
         }

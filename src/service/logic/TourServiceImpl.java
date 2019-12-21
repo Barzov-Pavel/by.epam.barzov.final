@@ -1,10 +1,11 @@
 package service.logic;
 
+import service.ServiceException;
+import service.TourNotExistsException;
+import service.TourService;
 import dao.DaoException;
 import dao.TourDao;
 import domain.Tour;
-import domain.User;
-import service.*;
 
 import java.util.List;
 

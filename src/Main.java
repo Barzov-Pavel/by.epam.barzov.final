@@ -1,18 +1,12 @@
-import dao.Dao;
+import domain.Role;
+import domain.User;
 import dao.DaoException;
-import dao.mysql.PurchaseDaoImpl;
-import dao.mysql.TourDaoImpl;
 import dao.mysql.UserDaoImpl;
-import domain.*;
-import service.ServiceException;
 import service.logic.UserServiceImpl;
 import util.Connector;
 
-import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 public class Main {
     public static void main(String[] args) {

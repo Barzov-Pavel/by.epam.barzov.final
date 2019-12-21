@@ -15,6 +15,7 @@
             <th><fmt:message key="tour.list.table.rating"/></th>
             <td>&nbsp;</td>
         </tr>
+
         <c:forEach var="tour" items="${tours}">
             <tr>
                 <td class="content">${tour.title}</td>
@@ -23,15 +24,30 @@
                 <td class="content">${tour.price}</td>
                 <td class="content">${tour.enabled}</td>
                 <td class="content">${tour.avgRating}</td>
-                <td class="empty">
-                    <c:url var="urlTourEdit" value="/user/tour-edit.html">
-                        <c:param name="id" value="${tour.id}"/>
-                    </c:url>
-                    <a href="${urlTourEdit}" class="edit"></a>
-                </td>
+                <c:if test="${currentUser.role == \"TOUR_AGENT\"}">
+                    <td class="empty">
+                        <c:url var="urlTourEdit" value="/user/tour-edit.html">
+                            <c:param name="id" value="${tour.id}"/>
+                        </c:url>
+                        <a href="${urlTourEdit}" class="edit"></a>
+                    </td>
+                </c:if>
+                <c:if test="${currentUser.role == \"CUSTOMER\"}">
+                    <td class="empty">
+                        <c:url var="urlTourBuy" value="/user/tour-buy.html">
+                            <c:param name="tourId" value="${tour.id}"/>
+                            <c:param name="userId" value="${currentUser.id}"/>
+                            <c:param name="price" value="${tour.price}"/>
+                        </c:url>
+                        <a href="${urlTourBuy}" class="buy"></a>
+                    </td>
+                </c:if>
             </tr>
         </c:forEach>
+
     </table>
-    <c:url var="urlTourEdit" value="/user/tour-edit.html"/>
-    <a href="${urlTourEdit}" class="add-button"><fmt:message key="tour.button"/></a>
+    <c:if test="${currentUser.role == \"TOUR_AGENT\"}">
+        <c:url var="urlTourEdit" value="/user/tour-edit.html"/>
+        <a href="${urlTourEdit}" class="add-button"><fmt:message key="tour.button"/></a>
+    </c:if>
 </u:html>

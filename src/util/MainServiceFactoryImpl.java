@@ -1,11 +1,15 @@
 package util;
 
+import dao.PurchaseDao;
 import dao.TourDao;
 import dao.UserDao;
+import dao.mysql.PurchaseDaoImpl;
 import dao.mysql.TourDaoImpl;
 import dao.mysql.UserDaoImpl;
+import service.PurchaseService;
 import service.TourService;
 import service.UserService;
+import service.logic.PurchaseServiceImpl;
 import service.logic.TourServiceImpl;
 import service.logic.UserServiceImpl;
 
@@ -42,6 +46,20 @@ public class MainServiceFactoryImpl implements ServiceFactory {
         TourDaoImpl tourDao = new TourDaoImpl();
         tourDao.setConnection(getConnection());
         return tourDao;
+    }
+
+    @Override
+    public PurchaseDao getPurchaseDao() throws FactoryException {
+        PurchaseDaoImpl purchaseDao = new PurchaseDaoImpl();
+        purchaseDao.setConnection(getConnection());
+        return purchaseDao;
+    }
+
+    @Override
+    public PurchaseService getPurchaseService() throws FactoryException {
+        PurchaseServiceImpl purchaseService = new PurchaseServiceImpl();
+        purchaseService.setPurchaseDao(getPurchaseDao());
+        return purchaseService;
     }
 
     @Override

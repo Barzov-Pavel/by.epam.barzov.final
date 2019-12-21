@@ -1,6 +1,7 @@
 package dao.mysql;
 
-import dao.*;
+import dao.DaoException;
+import dao.UserDao;
 import domain.User;
 
 import java.sql.*;

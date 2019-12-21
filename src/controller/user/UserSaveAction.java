@@ -3,6 +3,8 @@ package controller.user;
 import controller.Action;
 import controller.Forward;
 import domain.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import service.ServiceException;
 import service.UserService;
 import util.FactoryException;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UserSaveAction extends Action {
+    private static final Logger LOGGER = LogManager.getLogger(UserSaveAction.class);
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -36,6 +39,7 @@ public class UserSaveAction extends Action {
                 UserService service = getServiceFactory().getUserService();
                 service.save(user);
             } catch (FactoryException | ServiceException e) {
+                LOGGER.error("Don't save user " + e.getMessage());
                 throw new ServletException(e);
             }
         }

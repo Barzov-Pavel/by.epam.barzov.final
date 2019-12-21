@@ -1,5 +1,7 @@
 package controller;
 
+import controller.purchase.BoughtToursAction;
+import controller.purchase.TourBuyAction;
 import controller.tour.TourDeleteAction;
 import controller.tour.TourEditAction;
 import controller.tour.TourListAction;
@@ -30,6 +32,8 @@ public class ActionFactory {
         actions.put("/user/tour-edit", TourEditAction.class);
         actions.put("/user/tour-save", TourSaveAction.class);
         actions.put("/user/tour-delete", TourDeleteAction.class);
+        actions.put("/user/tour-buy", TourBuyAction.class);
+        actions.put("/user/bought-tours", BoughtToursAction.class);
     }
 
     public static Action getAction(String url) throws ServletException {

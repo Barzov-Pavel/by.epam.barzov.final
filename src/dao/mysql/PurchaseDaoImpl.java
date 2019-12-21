@@ -85,6 +85,11 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
 
     @Override
     public List<Purchase> readAll() throws DaoException {
+        UserDaoImpl userDao = new UserDaoImpl();
+        TourDaoImpl tourDao = new TourDaoImpl();
+        userDao.setConnection(getConnection());
+        tourDao.setConnection(getConnection());
+
         String sql = "SELECT * FROM `purchase`";
         Statement statement = null;
         ResultSet resultSet = null;
@@ -95,8 +100,8 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             while (resultSet.next()) {
                 Purchase purchase = new Purchase();
                 purchase.setId(resultSet.getLong("id"));
-                purchase.setUser(new User(resultSet.getLong("user_id")));
-                purchase.setTour(new Tour(resultSet.getLong("tour_id")));
+                purchase.setUser(userDao.read(resultSet.getLong("user_id")));
+                purchase.setTour(tourDao.read(resultSet.getLong("tour_id")));
                 purchase.setDate(resultSet.getDate("date"));
                 purchase.setPrice(resultSet.getBigDecimal("price"));
                 purchase.setStatus(resultSet.getString("status"));

@@ -1,9 +1,6 @@
 package dao;
 
-import domain.*;
-
-import java.math.BigDecimal;
-import java.util.List;
+import domain.User;
 
 public interface UserDao extends Dao<User> {
     User readByLogin(String login) throws DaoException;

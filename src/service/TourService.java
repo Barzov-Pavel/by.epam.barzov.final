@@ -1,7 +1,6 @@
 package service;
 
 import domain.Tour;
-import domain.User;
 
 import java.util.List;
 
