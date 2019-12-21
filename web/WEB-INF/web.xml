@@ -16,7 +16,7 @@
         <servlet-name>DispatcherServlet</servlet-name>
         <servlet-class>controller.DispatcherServlet</servlet-class>
     </servlet>
-    
+
     <servlet-mapping>
         <servlet-name>DispatcherServlet</servlet-name>
         <url-pattern>*.html</url-pattern>
@@ -31,4 +31,15 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+    <!-- Filter set encoding UTF-8 -->
+    <filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>controller.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>*.html</url-pattern>
+    </filter-mapping>
+
 </web-app>

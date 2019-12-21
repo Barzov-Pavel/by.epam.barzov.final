@@ -18,7 +18,6 @@ public class UserSaveAction extends Action {
     private static final Logger LOGGER = LogManager.getLogger(UserSaveAction.class);
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
         User user = new User();
         try {
             user.setId(Long.parseLong(req.getParameter("id")));

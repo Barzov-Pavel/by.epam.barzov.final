@@ -15,29 +15,37 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/*
+ * A class displays data about purchased tours
+ */
+
 public class BoughtToursAction extends Action {
     private static final Logger LOGGER = LogManager.getLogger(BoughtToursAction.class);
+
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = null;
+        /*
+         * Get id from request for search all purchases
+         */
         try {
-            LOGGER.error("try to set id");
             id = Long.parseLong(req.getParameter("userId"));
-            LOGGER.error("id set");
         } catch (NumberFormatException e) {
-            LOGGER.error("id didn't set");
         }
+
+        /*
+         * Test id for null
+         * If id == null send redirect
+         */
 
         if (id != null) {
             try {
-                LOGGER.error("try to get purchase service");
                 PurchaseService service = getServiceFactory().getPurchaseService();
                 List<Purchase> purchases = service.getBoughtTours(id);
-                LOGGER.error("try to set purchases");
                 req.setAttribute("purchases", purchases);
-                LOGGER.error("purchases set");
                 return null;
             } catch (FactoryException | ServiceException e) {
+                LOGGER.error("Don't set of purchases " + e.getMessage());
                 throw new ServletException(e);
             }
         } else {

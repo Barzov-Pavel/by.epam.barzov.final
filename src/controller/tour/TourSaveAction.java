@@ -1,26 +1,31 @@
 package controller.tour;
 
-import controller.Action;
-import controller.Forward;
+import controller.*;
 import domain.Tour;
-import service.ServiceException;
-import service.TourService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import service.*;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 
+/*
+ * A class save information about tour in database
+ */
+
 public class TourSaveAction extends Action {
+    private static final Logger LOGGER = LogManager.getLogger(TourSaveAction.class);
+
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
         Tour tour = new Tour();
         try {
             tour.setId(Long.parseLong(req.getParameter("id")));
-        } catch(NumberFormatException e) {}
+        } catch (NumberFormatException e) {
+        }
         try {
             tour.setTitle(req.getParameter("title"));
             tour.setDescription(req.getParameter("description"));
@@ -29,12 +34,15 @@ public class TourSaveAction extends Action {
             tour.setEnabled(Boolean.parseBoolean(req.getParameter("enabled")));
             tour.setAvgRating(Double.parseDouble(req.getParameter("rating")));
             tour.setDestination(req.getParameter("destination"));
-        } catch (NumberFormatException e) {}
+            tour.setHot(Boolean.parseBoolean(req.getParameter("hot")));
+        } catch (NumberFormatException e) {
+        }
         if (tour.getTitle() != null && tour.getDescription() != null) {
             try {
                 TourService service = getServiceFactory().getTourService();
                 service.save(tour);
             } catch (FactoryException | ServiceException e) {
+                LOGGER.error("Don't save tour in database " + e.getMessage());
                 throw new ServletException(e);
             }
         }

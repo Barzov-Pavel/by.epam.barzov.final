@@ -56,7 +56,6 @@
             </c:if>
             <button class="delete" formaction="${urlUserDelete}" formmethod="post" ${disabled}><fmt:message key="user.edit.button.delete"/></button>
         </c:if>
-        <button class="reset" type="reset"><fmt:message key="user.edit.button.reset"/></button>
         <button class="back" formaction="${urlUserList}" formmethod="get"><fmt:message key="user.edit.button.cancel"/></button>
     </form>
 </u:html>

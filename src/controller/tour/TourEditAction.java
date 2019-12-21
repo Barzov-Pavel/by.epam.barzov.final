@@ -1,18 +1,23 @@
 package controller.tour;
 
-import controller.Action;
-import controller.Forward;
+import controller.*;
 import domain.Tour;
-import service.ServiceException;
-import service.TourService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import service.*;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
+/*
+ * A class find tour by id and check the tour for the ability to remove
+ */
+
 public class TourEditAction extends Action {
+    private static final Logger LOGGER = LogManager.getLogger(TourEditAction.class);
+
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long id = null;
@@ -27,6 +32,7 @@ public class TourEditAction extends Action {
                 req.setAttribute("tour", tour);
                 boolean tourCanBeDeleted = service.canDelete(id);
             } catch (FactoryException | ServiceException e) {
+                LOGGER.error("Don't set tour " + e.getMessage());
                 throw new ServletException(e);
             }
         }

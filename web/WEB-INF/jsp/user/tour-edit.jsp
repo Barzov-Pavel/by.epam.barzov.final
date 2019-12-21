@@ -51,6 +51,8 @@
         <input id="rating" name="rating" value="${tour.avgRating}">
         <label for="destination"><fmt:message key="tour.edit.form.destination"/></label>
         <input id="destination" name="destination" value="${tour.destination}">
+        <label for="hot"><fmt:message key="tour.edit.form.hot"/></label>
+        <input id="hot" name="hot" value="${tour.hot}">
 
         <button class="save"><fmt:message key="tour.edit.button.save"/></button>
         <c:if test="${not empty tour.id}">
@@ -59,7 +61,6 @@
             </c:if>
             <button class="delete" formaction="${urlTourDelete}" formmethod="post" ${disabled}><fmt:message key="tour.edit.button.delete"/></button>
         </c:if>
-        <button class="reset" type="reset"><fmt:message key="tour.edit.button.reset"/></button>
         <button class="back" formaction="${urlTourList}" formmethod="get"><fmt:message key="tour.edit.button.cancel"/></button>
     </form>
 </u:html>
