@@ -13,6 +13,11 @@
 </head>
 <body>
 <h1><fmt:message key="application.title"/></h1>
+<form>
+    <c:url var="index" value="/index.html"/>
+    <button class="back" formaction="${index}" formmethod="get"><fmt:message key="index.title"/></button>
+</form>
+
 <c:if test="${not empty currentUser}">
     <c:url var="urlLogout" value="/logout.html"/>
     <p><fmt:message key="application.welcome"/> ${currentUser.userName} (${currentUser.role}).

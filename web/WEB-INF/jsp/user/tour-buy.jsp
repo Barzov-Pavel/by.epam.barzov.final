@@ -3,10 +3,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<u:html title="Список купленных туров">
-    <h2>Поздравляем вы купили тур</h2>
+<fmt:message var="title" key="tour.buy.title"/>
+<u:html title="${title}">
+    <h2><fmt:message key="tour.buy.congratulation"/></h2>
     <c:url var="boughtTours" value="/user/bought-tours.html">
         <c:param name="userId" value="${currentUser.id}"/>
     </c:url>
-    <p><a href="${boughtTours}">Список купленных туров</a></p>
+    <p><a href="${boughtTours}"><fmt:message key="tour.buy.list"/></a></p>
 </u:html>

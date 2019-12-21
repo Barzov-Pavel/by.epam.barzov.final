@@ -3,8 +3,9 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<u:html title="Список туров">
-    <h2><fmt:message key="tour.list.title"/></h2>
+<fmt:message var="title" key="tour.list.title"/>
+<u:html title="${title}">
+    <h2>${title}</h2>
     <table>
         <tr>
             <th><fmt:message key="tour.list.table.name"/></th>

@@ -18,7 +18,7 @@
         <c:url var="boughtTours" value="/user/bought-tours.html">
             <c:param name="userId" value="${currentUser.id}"/>
         </c:url>
-        <p><a href="${boughtTours}">Список купленных туров</a></p>
+        <p><a href="${boughtTours}"><fmt:message key="index.tours"/></a></p>
     </c:if>
     <c:url var="userList" value="/user/tour-list.html"/>
     <p><a href="${userList}"><fmt:message key="index.tour"/></a></p>

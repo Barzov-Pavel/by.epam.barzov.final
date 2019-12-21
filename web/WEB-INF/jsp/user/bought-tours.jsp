@@ -3,16 +3,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<u:html title="Список купленных туров">
-    <h2>Список купленных туров</h2>
+<fmt:message key="bought.tours.table.title" var="title"/>
+<u:html title="${title}">
+    <h2>${title}</h2>
     <table>
         <tr>
-            <th>Имя пользователя</th>
-            <th>Фамилия пользователя</th>
-            <th>Название тура</th>
-            <th>Дата покупки</th>
-            <th>Цена</th>
-            <td>&nbsp;</td>
+            <th><fmt:message key="bought.tours.table.firstName"/></th>
+            <th><fmt:message key="bought.tours.table.lastName"/></th>
+            <th><fmt:message key="bought.tours.table.title"/></th>
+            <th><fmt:message key="bought.tours.table.date"/></th>
+            <th><fmt:message key="bought.tours.table.price"/></th>
         </tr>
 
         <c:forEach var="purchase" items="${purchases}">
