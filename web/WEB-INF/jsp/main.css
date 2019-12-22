@@ -59,7 +59,7 @@ p.error {
     min-height: 100%;
 }
 
-.content {
+.cont {
     padding-bottom: 100px;
 }
 
@@ -253,7 +253,7 @@ caption {
 
 th {
     border-bottom: 3px solid #B9B29F;
-    padding: 10px;
+    padding: 0px;
     text-align: left;
 }
 

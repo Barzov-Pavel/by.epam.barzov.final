@@ -173,4 +173,45 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             }
         }
     }
+
+    @Override
+    public List<Purchase> getBoughtTours(Long userId) throws DaoException {
+        UserDaoImpl userDao = new UserDaoImpl();
+        TourDaoImpl tourDao = new TourDaoImpl();
+        userDao.setConnection(getConnection());
+        tourDao.setConnection(getConnection());
+
+        String sql = "SELECT * FROM `purchase` WHERE user_id=?";
+        PreparedStatement statement = null;
+        ResultSet resultSet = null;
+        try {
+            statement = getConnection().prepareStatement(sql);
+            statement.setLong(1, userId);
+            resultSet = statement.executeQuery();
+            List<Purchase> purchases = new ArrayList<>();
+            while (resultSet.next()) {
+                Purchase purchase = new Purchase();
+                purchase.setId(resultSet.getLong("id"));
+                purchase.setUser(userDao.read(resultSet.getLong("user_id")));
+                purchase.setTour(tourDao.read(resultSet.getLong("tour_id")));
+                purchase.setDate(resultSet.getDate("date"));
+                purchase.setPrice(resultSet.getBigDecimal("price"));
+                purchase.setStatus(resultSet.getString("status"));
+                purchases.add(purchase);
+            }
+            return purchases;
+        } catch (SQLException e) {
+            LOGGER.error("Don't read purchases one user " + e.getMessage() + e.getSQLState());
+            throw new DaoException(e);
+        } finally {
+            try {
+                statement.close();
+            } catch (Exception e) {
+            }
+            try {
+                resultSet.close();
+            } catch (Exception e) {
+            }
+        }
+    }
 }

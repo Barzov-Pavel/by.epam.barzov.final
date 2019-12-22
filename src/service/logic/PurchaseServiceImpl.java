@@ -29,7 +29,7 @@ public class PurchaseServiceImpl extends BaseService implements PurchaseService 
     @Override
     public List<Purchase> getBoughtTours(Long userId) throws ServiceException {
         try {
-            return purchaseDao.readAll();
+            return purchaseDao.getBoughtTours(userId);
         } catch (DaoException e) {
             LOGGER.error("Don't read all purchases. Service exception " + e.getMessage());
             throw new ServiceException(e);

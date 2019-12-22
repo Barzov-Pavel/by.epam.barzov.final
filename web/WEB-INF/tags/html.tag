@@ -16,7 +16,7 @@
     <header class="header">
         <h1><fmt:message key="application.title"/></h1>
     </header>
-    <div class="content">
+    <div class="cont">
         <form>
             <c:url var="index" value="/index.html"/>
             <button class="back" formaction="${index}" formmethod="get"><fmt:message key="index.title"/></button>
