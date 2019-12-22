@@ -1,6 +1,7 @@
 package service;
 
 import domain.Tour;
+import service.exceptions.ServiceException;
 
 import java.util.List;
 

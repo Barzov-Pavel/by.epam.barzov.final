@@ -2,16 +2,18 @@ package service.logic;
 
 import java.util.List;
 
-import dao.DaoException;
-import dao.UserDao;
+import dao.*;
 import domain.User;
-import service.ServiceException;
-import service.UserLoginNotUniqueException;
-import service.UserNotExistsException;
-import service.UserPasswordIncorrectException;
-import service.UserService;
+import org.apache.logging.log4j.*;
+import service.*;
+import service.exceptions.ServiceException;
+import service.exceptions.UserLoginNotUniqueException;
+import service.exceptions.UserNotExistsException;
+import service.exceptions.UserPasswordIncorrectException;
 
 public class UserServiceImpl extends BaseService implements UserService {
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
+
     private UserDao userDao;
     private String defaultPassword;
 
@@ -26,8 +28,9 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public User findById(Long id) throws ServiceException {
         try {
-            return (User) userDao.read(id);
+            return userDao.read(id);
         } catch (DaoException e) {
+            LOGGER.error("Don't find user by id. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -37,6 +40,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             return userDao.readByLoginAndPassword(login, password);
         } catch (DaoException e) {
+            LOGGER.error("Don't find user by login and password. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -46,6 +50,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             return userDao.readAll();
         } catch (DaoException e) {
+            LOGGER.error("Don't find all users. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -53,7 +58,6 @@ public class UserServiceImpl extends BaseService implements UserService {
     @Override
     public void save(User user) throws ServiceException {
         try {
-//            getTransaction().start();
             if (user.getId() != null) {
                 User storedUser = userDao.read(user.getId());
                 if (storedUser != null) {
@@ -61,6 +65,7 @@ public class UserServiceImpl extends BaseService implements UserService {
                     if (storedUser.getUserName().equals(user.getUserName()) || userDao.readByLogin(user.getUserName()) == null) {
                         userDao.update(user);
                     } else {
+                        LOGGER.warn("Login not unique");
                         throw new UserLoginNotUniqueException(user.getUserName());
                     }
                 } else {
@@ -71,22 +76,13 @@ public class UserServiceImpl extends BaseService implements UserService {
                     Long id = userDao.create(user);
                     user.setId(id);
                 } else {
+                    LOGGER.warn("Login not unique");
                     throw new UserLoginNotUniqueException(user.getUserName());
                 }
             }
-//            getTransaction().commit();
-        } catch (DaoException e) {
-//            try {
-////                getTransaction().rollback();
-//            } catch (ServiceException e1) {
-//            }
+        } catch (DaoException | ServiceException e) {
+            LOGGER.error("Don't save user. Service exception " + e.getMessage());
             throw new ServiceException(e);
-        } catch (ServiceException e) {
-            try {
-                getTransaction().rollback();
-            } catch (ServiceException e1) {
-            }
-            throw e;
         }
     }
 
@@ -94,7 +90,7 @@ public class UserServiceImpl extends BaseService implements UserService {
     public void changePassword(Long userId, String oldPassword, String newPassword) throws ServiceException {
         try {
             getTransaction().start();
-            User user = (User) userDao.read(userId);
+            User user = userDao.read(userId);
             if (user != null) {
                 if (user.getPassword().equals(oldPassword)) {
                     if (newPassword == null) {
@@ -103,24 +99,17 @@ public class UserServiceImpl extends BaseService implements UserService {
                     user.setPassword(newPassword);
                     userDao.update(user);
                 } else {
+                    LOGGER.warn("Incorrect password");
                     throw new UserPasswordIncorrectException(user.getId());
                 }
             } else {
+                LOGGER.warn("User not exists");
                 throw new UserNotExistsException(userId);
             }
             getTransaction().commit();
-        } catch (DaoException e) {
-            try {
-                getTransaction().rollback();
-            } catch (ServiceException e1) {
-            }
+        } catch (DaoException | ServiceException e) {
+            LOGGER.error("Don't change password. Service exception " + e.getMessage());
             throw new ServiceException(e);
-        } catch (ServiceException e) {
-            try {
-                getTransaction().rollback();
-            } catch (ServiceException e1) {
-            }
-            throw e;
         }
     }
 
@@ -129,6 +118,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             return !userDao.isUserBoughtTour(id);
         } catch (DaoException e) {
+            LOGGER.error("Don't check user for possibility of deletion. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -138,6 +128,7 @@ public class UserServiceImpl extends BaseService implements UserService {
         try {
             userDao.delete(id);
         } catch (DaoException e) {
+            LOGGER.error("Don't delete user. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }

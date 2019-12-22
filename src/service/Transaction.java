@@ -1,5 +1,7 @@
 package service;
 
+import service.exceptions.TransactionException;
+
 public interface Transaction {
     void start() throws TransactionException;
 

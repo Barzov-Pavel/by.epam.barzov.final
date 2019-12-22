@@ -1,24 +1,26 @@
 package controller;
 
-import controller.purchase.BoughtToursAction;
-import controller.purchase.TourBuyAction;
-import controller.tour.TourDeleteAction;
-import controller.tour.TourEditAction;
-import controller.tour.TourListAction;
-import controller.tour.TourSaveAction;
-import controller.user.UserDeleteAction;
-import controller.user.UserEditAction;
-import controller.user.UserListAction;
-import controller.user.UserSaveAction;
+import controller.purchase.*;
+import controller.tour.*;
+import controller.user.*;
+import org.apache.logging.log4j.*;
 
 import javax.servlet.ServletException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
+/*
+ * The class returns action corresponding url
+ */
 
 public class ActionFactory {
+    private static final Logger LOGGER = LogManager.getLogger(ActionFactory.class);
+
     private static Map<String, Class<? extends Action>> actions = new HashMap<>();
 
+    /*
+     * Set compliance between url and action
+     */
     static {
         actions.put("/", MainAction.class);
         actions.put("/index", MainAction.class);
@@ -36,11 +38,15 @@ public class ActionFactory {
         actions.put("/user/bought-tours", BoughtToursAction.class);
     }
 
+    /*
+     * Get action from map using url
+     */
     public static Action getAction(String url) throws ServletException {
         Class<?> action = actions.get(url);
         try {
             return (Action) action.getConstructor().newInstance();
         } catch (InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+            LOGGER.error("Don't get action " + e.getMessage());
             throw new ServletException(e);
         }
     }

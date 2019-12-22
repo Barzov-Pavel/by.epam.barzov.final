@@ -1,22 +1,30 @@
 package controller;
 
-import util.Connector;
-import util.MainServiceFactoryImpl;
-import util.ServiceFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import util.*;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
+/*
+ * The class is main servlet in application.
+ * Does init connector
+ * Gets service factory
+ * Handles all requests and responses and calls necessary action through service factory
+ */
+
 public class DispatcherServlet extends HttpServlet {
+    private static final Logger LOGGER = LogManager.getLogger(DispatcherServlet.class);
+
     @Override
     public void init() throws ServletException {
         try {
             Connector.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/new_schema?useUnicode=true&characterEncoding=utf8",
                     "root", "");
         } catch (ClassNotFoundException e) {
+            LOGGER.fatal("Don't init jdbc connector " + e.getMessage());
             throw new ServletException(e);
         }
     }
@@ -57,6 +65,7 @@ public class DispatcherServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/jsp" + url + ".jsp").forward(req, resp);
             }
         } catch (Exception e) {
+            LOGGER.error("Don't get service factory " + e.getMessage());
             throw new ServletException(e);
         }
     }

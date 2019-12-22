@@ -1,14 +1,22 @@
 package dao.mysql;
 
-import dao.DaoException;
-import dao.UserDao;
+import dao.*;
 import domain.User;
+import org.apache.logging.log4j.*;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+
+/*
+ * The class works with user table in database.
+ * Can create, update, read by id, read all, delete tours.
+ * Find tours by login, login and password.
+ * Check the users who bought the tour
+ */
 
 public class UserDaoImpl extends BaseDaoImpl implements UserDao {
+    private static final Logger LOGGER = LogManager.getLogger(UserDaoImpl.class);
+
     @Override
     public Long create(User user) throws DaoException {
         String sql = "INSERT INTO `user` (`username`, `firstName`, " +
@@ -33,6 +41,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return id;
         } catch (SQLException e) {
+            LOGGER.error("Don't create user in database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -69,6 +78,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return user;
         } catch (SQLException e) {
+            LOGGER.error("Don't read user by id from database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -105,6 +115,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return users;
         } catch (SQLException e) {
+            LOGGER.error("Don't read all tuples from table user " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -136,6 +147,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             statement.setLong(8, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Don't update user tuple in database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -154,6 +166,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Don't delete user from database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -186,6 +199,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return user;
         } catch (SQLException e) {
+            LOGGER.error("Don't read user by login from database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -223,6 +237,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             }
             return user;
         } catch (SQLException e) {
+            LOGGER.error("Don't read user by login and password from database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -249,6 +264,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 return true;
             }
         } catch (SQLException e) {
+            LOGGER.error("Don't check user who bought tour " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         }
         return false;

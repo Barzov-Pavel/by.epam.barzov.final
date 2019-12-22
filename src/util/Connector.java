@@ -1,8 +1,10 @@
 package util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+
+/*
+ * The class init connection and get connection
+ */
 
 public class Connector {
     private static String jdbcUrl;

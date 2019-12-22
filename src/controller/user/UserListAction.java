@@ -1,19 +1,24 @@
 package controller.user;
 
-import controller.Action;
-import controller.Forward;
+import controller.*;
 import domain.User;
-import service.ServiceException;
-import service.UserService;
+import org.apache.logging.log4j.*;
+import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
+/*
+ * The class finds all users in database
+ */
+
 public class UserListAction extends Action {
+    private static final Logger LOGGER = LogManager.getLogger(UserListAction.class);
+
     @Override
     public Forward execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
@@ -22,6 +27,7 @@ public class UserListAction extends Action {
             req.setAttribute("users", users);
             return null;
         } catch (FactoryException | ServiceException e) {
+            LOGGER.error("Don't set List users " + e.getMessage());
             throw new ServletException(e);
         }
     }

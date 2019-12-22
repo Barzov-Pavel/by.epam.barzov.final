@@ -1,15 +1,16 @@
 package service.logic;
 
-import service.ServiceException;
-import service.TourNotExistsException;
-import service.TourService;
-import dao.DaoException;
-import dao.TourDao;
+import org.apache.logging.log4j.*;
+import service.*;
+import dao.*;
 import domain.Tour;
+import service.exceptions.ServiceException;
+import service.exceptions.TourNotExistsException;
 
 import java.util.List;
 
 public class TourServiceImpl extends BaseService implements TourService {
+    private static final Logger LOGGER = LogManager.getLogger(TourServiceImpl.class);
     private TourDao tourDao;
 
     public void setTourDao(TourDao tourDao) {
@@ -21,6 +22,7 @@ public class TourServiceImpl extends BaseService implements TourService {
         try {
             return tourDao.read(id);
         } catch (DaoException e) {
+            LOGGER.error("Don't find tour by id. Service Exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -30,6 +32,7 @@ public class TourServiceImpl extends BaseService implements TourService {
         try {
             return tourDao.readAll();
         } catch (DaoException e) {
+            LOGGER.error("Don't find all tours. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -37,7 +40,6 @@ public class TourServiceImpl extends BaseService implements TourService {
     @Override
     public void save(Tour tour) throws ServiceException {
         try {
-//            getTransaction().start();
             if (tour.getId() != null) {
                 Tour storedTour = tourDao.read(tour.getId());
                 if (storedTour != null) {
@@ -50,19 +52,9 @@ public class TourServiceImpl extends BaseService implements TourService {
                 tour.setId(id);
 
             }
-//            getTransaction().commit();
-        } catch (DaoException e) {
-//            try {
-////                getTransaction().rollback();
-//            } catch (ServiceException e1) {
-//            }
+        } catch (DaoException | ServiceException e) {
+            LOGGER.error("Don't save tour. Service exception " + e.getMessage());
             throw new ServiceException(e);
-        } catch (ServiceException e) {
-//            try {
-//                getTransaction().rollback();
-//            } catch (ServiceException e1) {
-//            }
-            throw e;
         }
     }
 
@@ -71,6 +63,7 @@ public class TourServiceImpl extends BaseService implements TourService {
         try {
             return !tourDao.isTourWasBought(id);
         } catch (DaoException e) {
+            LOGGER.error("Don't  check the tour for the possibility of deletion. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -80,6 +73,7 @@ public class TourServiceImpl extends BaseService implements TourService {
         try {
             tourDao.delete(id);
         } catch (DaoException e) {
+            LOGGER.error("Don't delete tour. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }

@@ -1,10 +1,9 @@
 package controller.tour;
 
 import controller.*;
-import controller.purchase.TourBuyAction;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
@@ -12,7 +11,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 /*
- * A class implements functionality for delete tour
+ * The class implements functionality for delete tour
  * We can delete a tour that has never been bought
  */
 

@@ -1,6 +1,7 @@
 package service;
 
 import domain.Purchase;
+import service.exceptions.ServiceException;
 
 import java.util.List;
 

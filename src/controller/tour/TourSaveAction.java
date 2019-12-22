@@ -2,9 +2,9 @@ package controller.tour;
 
 import controller.*;
 import domain.Tour;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /*
- * A class save information about tour in database
+ * The class saves information about tour in database
  */
 
 public class TourSaveAction extends Action {

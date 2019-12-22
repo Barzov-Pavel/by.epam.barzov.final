@@ -4,12 +4,13 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /*
-* class set encoding type UTF-8
+ * The class sets encoding type UTF-8
  */
 
 public class EncodingFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {}
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
 
     @Override
     public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain) throws IOException, ServletException {
@@ -18,5 +19,6 @@ public class EncodingFilter implements Filter {
     }
 
     @Override
-    public void destroy() {}
+    public void destroy() {
+    }
 }

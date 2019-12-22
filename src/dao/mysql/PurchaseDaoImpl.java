@@ -1,19 +1,24 @@
 package dao.mysql;
 
-import dao.DaoException;
-import dao.PurchaseDao;
-import domain.Purchase;
-import domain.Tour;
-import domain.User;
+import dao.*;
+import domain.*;
+import org.apache.logging.log4j.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
+
+/*
+ * The class works with Purchase table.
+ * Create new purchase.
+ * Read by id.
+ * Read all tuples from table.
+ * Update tuple.
+ * Delete tuple by id.
+ */
 
 public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
+    private static final Logger LOGGER = LogManager.getLogger(PurchaseDaoImpl.class);
+
     @Override
     public Long create(Purchase purchase) throws DaoException {
         String sql = "INSERT INTO `purchase` (`user_id`, `tour_id`, " +
@@ -36,6 +41,7 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             }
             return id;
         } catch (SQLException e) {
+            LOGGER.error("Don't create purchase in database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -70,6 +76,7 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             }
             return purchase;
         } catch (SQLException e) {
+            LOGGER.error("Don't read purchase by id " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -109,6 +116,7 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             }
             return purchases;
         } catch (SQLException e) {
+            LOGGER.error("Don't read all tuples from purchase table " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -137,6 +145,7 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             statement.setLong(6, purchase.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Don't update tuple in purchase table " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -155,6 +164,7 @@ public class PurchaseDaoImpl extends BaseDaoImpl implements PurchaseDao {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Don't delete purchase " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {

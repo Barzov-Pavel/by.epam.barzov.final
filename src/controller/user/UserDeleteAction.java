@@ -1,17 +1,20 @@
 package controller.user;
 
-import controller.Action;
-import controller.Forward;
-import service.ServiceException;
-import service.UserService;
+import controller.*;
+import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 import org.apache.logging.log4j.*;
+
+/*
+ * The class implements functionality for delete user
+ * We can delete a user who has never bought a tour
+ */
 
 public class UserDeleteAction extends Action {
     private static final Logger LOGGER = LogManager.getLogger(UserDeleteAction.class);
@@ -22,7 +25,6 @@ public class UserDeleteAction extends Action {
         try {
             id = Long.parseLong(req.getParameter("id"));
         } catch (NumberFormatException e) {
-
         }
         if (id != null) {
             try {

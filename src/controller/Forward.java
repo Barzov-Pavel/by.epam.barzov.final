@@ -1,5 +1,9 @@
 package controller;
 
+/*
+ * The class makes redirect
+ */
+
 public class Forward {
     private String url;
     private boolean redirect;

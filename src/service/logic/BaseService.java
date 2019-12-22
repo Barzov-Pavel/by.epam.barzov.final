@@ -1,6 +1,6 @@
 package service.logic;
 
-        import service.Transaction;
+import service.Transaction;
 
 public class BaseService {
     private Transaction transaction;

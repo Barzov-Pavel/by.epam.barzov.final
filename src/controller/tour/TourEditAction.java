@@ -2,9 +2,9 @@ package controller.tour;
 
 import controller.*;
 import domain.Tour;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
@@ -12,7 +12,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 /*
- * A class find tour by id and check the tour for the ability to remove
+ * The class finds tour by id and checks the tour for the ability to remove
  */
 
 public class TourEditAction extends Action {

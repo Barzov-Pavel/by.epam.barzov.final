@@ -1,20 +1,15 @@
 package util;
 
-import dao.PurchaseDao;
-import dao.TourDao;
-import dao.UserDao;
-import dao.mysql.PurchaseDaoImpl;
-import dao.mysql.TourDaoImpl;
-import dao.mysql.UserDaoImpl;
-import service.PurchaseService;
-import service.TourService;
-import service.UserService;
-import service.logic.PurchaseServiceImpl;
-import service.logic.TourServiceImpl;
-import service.logic.UserServiceImpl;
+import dao.*;
+import dao.mysql.*;
+import service.*;
+import service.logic.*;
 
-import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.*;
+
+/*
+ * The class create all services and dao in application
+ */
 
 public class MainServiceFactoryImpl implements ServiceFactory {
     private Connection connection;

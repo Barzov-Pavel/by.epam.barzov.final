@@ -1,17 +1,20 @@
 package dao.mysql;
 
-import dao.DaoException;
-import dao.TourDao;
+import dao.*;
 import domain.Tour;
+import org.apache.logging.log4j.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.*;
+import java.util.*;
+
+/*
+ * The class works with tour table in database.
+ * Can create, update, read by id, read all, delete and check bought tours.
+ */
 
 public class TourDaoImpl extends BaseDaoImpl implements TourDao {
+    private static final Logger LOGGER = LogManager.getLogger(TourDaoImpl.class);
+
     @Override
     public Long create(Tour tour) throws DaoException {
         String sql = "INSERT INTO `tour` (`title`, `description`, " +
@@ -40,6 +43,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             }
             return id;
         } catch (SQLException e) {
+            LOGGER.error("Don't create tour tuple in database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -79,6 +83,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             }
             return tour;
         } catch (SQLException e) {
+            LOGGER.error("Don't read tour in database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -118,6 +123,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             }
             return tours;
         } catch (SQLException e) {
+            LOGGER.error("Don't read all tuples from tour table " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -152,6 +158,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             statement.setLong(11, tour.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Don't update tour tuple " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -170,6 +177,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
             statement.setLong(1, id);
             statement.executeUpdate();
         } catch (SQLException e) {
+            LOGGER.error("Don't delete tour tuple from database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         } finally {
             try {
@@ -192,6 +200,7 @@ public class TourDaoImpl extends BaseDaoImpl implements TourDao {
                 return true;
             }
         } catch (SQLException e) {
+            LOGGER.error("Don't check bought tour in database " + e.getMessage() + e.getSQLState());
             throw new DaoException(e);
         }
         return false;

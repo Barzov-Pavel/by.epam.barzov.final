@@ -2,21 +2,20 @@ package controller.purchase;
 
 import controller.*;
 import domain.*;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.*;
 import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
 
 /*
- * A class implements tour purchase functionality
- * A class Purchase contains objects of classes Tour and User
+ * The class implements tour purchase functionality
+ * The class Purchase contains objects of classes Tour and User
  */
 
 public class TourBuyAction extends Action {

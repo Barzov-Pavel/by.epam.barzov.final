@@ -1,4 +1,4 @@
-package service;
+package service.exceptions;
 
 public class UserNotExistsException extends ServiceException {
     private Long id;

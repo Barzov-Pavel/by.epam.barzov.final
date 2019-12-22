@@ -1,14 +1,15 @@
 package service.logic;
 
-import dao.DaoException;
-import dao.PurchaseDao;
+import dao.*;
 import domain.Purchase;
-import service.PurchaseService;
-import service.ServiceException;
+import org.apache.logging.log4j.*;
+import service.*;
+import service.exceptions.ServiceException;
 
 import java.util.List;
 
 public class PurchaseServiceImpl extends BaseService implements PurchaseService {
+    private static final Logger LOGGER = LogManager.getLogger(PurchaseServiceImpl.class);
     private PurchaseDao purchaseDao;
 
     public void setPurchaseDao(PurchaseDao purchaseDao) {
@@ -20,6 +21,7 @@ public class PurchaseServiceImpl extends BaseService implements PurchaseService 
         try {
             purchaseDao.create(purchase);
         } catch (DaoException e) {
+            LOGGER.error("Don't create purchase. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }
@@ -29,6 +31,7 @@ public class PurchaseServiceImpl extends BaseService implements PurchaseService 
         try {
             return purchaseDao.readAll();
         } catch (DaoException e) {
+            LOGGER.error("Don't read all purchases. Service exception " + e.getMessage());
             throw new ServiceException(e);
         }
     }

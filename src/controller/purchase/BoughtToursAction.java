@@ -1,22 +1,19 @@
 package controller.purchase;
 
-import controller.Action;
-import controller.Forward;
+import controller.*;
 import domain.Purchase;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import service.PurchaseService;
-import service.ServiceException;
+import org.apache.logging.log4j.*;
+import service.*;
+import service.exceptions.ServiceException;
 import util.FactoryException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.List;
 
 /*
- * A class displays data about purchased tours
+ * The class displays data about purchased tours
  */
 
 public class BoughtToursAction extends Action {

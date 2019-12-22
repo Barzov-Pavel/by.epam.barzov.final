@@ -1,4 +1,4 @@
-package service;
+package service.exceptions;
 
 public class UserLoginNotUniqueException extends ServiceException {
     private String login;

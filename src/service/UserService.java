@@ -3,6 +3,7 @@ package service;
 import java.util.List;
 
 import domain.User;
+import service.exceptions.ServiceException;
 
 public interface UserService {
     User findById(Long id) throws ServiceException;
