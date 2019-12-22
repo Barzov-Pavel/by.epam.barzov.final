@@ -9,12 +9,16 @@
     <table>
         <tr>
             <th><fmt:message key="user.list.table.login"/></th>
+            <th><fmt:message key="user.list.table.lastName"/></th>
+            <th><fmt:message key="user.list.table.firstName"/></th>
             <th><fmt:message key="user.list.table.role"/></th>
-            <td>&nbsp;</td>
+            <th>&nbsp;</th>
         </tr>
         <c:forEach var="user" items="${users}">
             <tr>
                 <td class="content">${user.userName}</td>
+                <td class="content">${user.lastName}</td>
+                <td class="content">${user.firstName}</td>
                 <td class="content">${user.role}</td>
                 <td class="empty">
                     <c:url var="urlUserEdit" value="/user/edit.html">

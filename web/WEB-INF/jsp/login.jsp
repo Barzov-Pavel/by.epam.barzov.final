@@ -15,6 +15,6 @@
         <input id="login" name="login">
         <label for="password"><fmt:message key="login.form.password"/>:</label>
         <input id="password" name="password" type="password">
-        <button class="login"><fmt:message key="login.button.login"/></button>
+        <button class="add-button"><fmt:message key="login.button.login"/></button>
     </form>
 </u:html>

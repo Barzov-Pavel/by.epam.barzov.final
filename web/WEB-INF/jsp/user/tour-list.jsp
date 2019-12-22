@@ -14,7 +14,12 @@
             <th><fmt:message key="tour.list.table.price"/></th>
             <th><fmt:message key="tour.list.table.enabled"/></th>
             <th><fmt:message key="tour.list.table.rating"/></th>
-            <td>&nbsp;</td>
+            <c:if test="${currentUser.role == \"TOUR_AGENT\"}">
+                <th>&nbsp;</th>
+            </c:if>
+            <c:if test="${currentUser.role == \"CUSTOMER\"}">
+                <th>&nbsp;</th>
+            </c:if>
         </tr>
 
         <c:forEach var="tour" items="${tours}">
