@@ -8,7 +8,7 @@
     <h2>${title}</h2>
     <c:url var="login" value="/login.html"/>
     <c:if test="${currentUser == null}">
-        <p><a href="${login}">Вход</a></p>
+        <p><a href="${login}"><fmt:message key="index.login"/></a></p>
     </c:if>
     <c:if test="${currentUser.role == \"TOUR_AGENT\"}">
         <c:url var="userList" value="/user/list.html"/>

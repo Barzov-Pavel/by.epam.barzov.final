@@ -22,7 +22,7 @@ public class DispatcherServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             Connector.init("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/new_schema?useUnicode=true&characterEncoding=utf8",
-                    "root", "");
+                    "root", "root");
         } catch (ClassNotFoundException e) {
             LOGGER.fatal("Don't init jdbc connector " + e.getMessage());
             throw new ServletException(e);
