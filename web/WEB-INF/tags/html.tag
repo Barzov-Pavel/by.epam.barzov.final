@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <title>${title}</title>
-    <c:url var="urlCss" value="/main.css"/>
+    <c:url var="urlCss" value="/style.css"/>
     <link href="${urlCss}" rel="stylesheet">
 </head>
 <body>
