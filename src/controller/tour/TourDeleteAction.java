@@ -34,6 +34,6 @@ public class TourDeleteAction extends Action {
                 throw new ServletException(e);
             }
         }
-        return new Forward("/user/tour-list.html");
+        return new Forward("/tour/tour-list.html");
     }
 }

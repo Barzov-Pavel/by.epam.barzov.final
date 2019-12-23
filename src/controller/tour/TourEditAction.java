@@ -31,6 +31,7 @@ public class TourEditAction extends Action {
                 Tour tour = service.findById(id);
                 req.setAttribute("tour", tour);
                 boolean tourCanBeDeleted = service.canDelete(id);
+                req.setAttribute("tourCanBeDeleted", tourCanBeDeleted);
             } catch (FactoryException | ServiceException e) {
                 LOGGER.error("Don't set tour " + e.getMessage());
                 throw new ServletException(e);

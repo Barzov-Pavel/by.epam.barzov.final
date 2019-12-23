@@ -32,7 +32,7 @@
                 <td class="content">${tour.avgRating}</td>
                 <c:if test="${currentUser.role == \"TOUR_AGENT\"}">
                     <td class="empty">
-                        <c:url var="urlTourEdit" value="/user/tour-edit.html">
+                        <c:url var="urlTourEdit" value="/tour/tour-edit.html">
                             <c:param name="id" value="${tour.id}"/>
                         </c:url>
                         <a href="${urlTourEdit}" class="edit"></a>
@@ -40,7 +40,7 @@
                 </c:if>
                 <c:if test="${currentUser.role == \"CUSTOMER\"}">
                     <td class="empty">
-                        <c:url var="urlTourBuy" value="/user/tour-buy.html">
+                        <c:url var="urlTourBuy" value="/tour/tour-buy.html">
                             <c:param name="tourId" value="${tour.id}"/>
                             <c:param name="userId" value="${currentUser.id}"/>
                             <c:param name="price" value="${tour.price}"/>
@@ -53,7 +53,7 @@
 
     </table>
     <c:if test="${currentUser.role == \"TOUR_AGENT\"}">
-        <c:url var="urlTourEdit" value="/user/tour-edit.html"/>
+        <c:url var="urlTourEdit" value="/tour/tour-edit.html"/>
         <a href="${urlTourEdit}" class="add-button"><fmt:message key="tour.button"/></a>
     </c:if>
 </u:html>

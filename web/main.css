@@ -108,7 +108,7 @@ p.error {
 }
 
 .add-button:hover {
-    background: rgb(112, 167, 79) linear-gradient(rgb(64, 106, 45), rgb(112, 167, 79) 80%);
+    background: rgb(67, 186, 59) linear-gradient(rgb(64, 106, 45), rgb(67, 186, 59) 80%);
 }
 
 .add-button:active {
@@ -145,7 +145,7 @@ p.error {
 }
 
 .save:hover {
-    background: rgb(112, 167, 79) linear-gradient(rgb(64, 106, 45), rgb(112, 167, 79) 80%);
+    background: rgb(67, 186, 59) linear-gradient(rgb(64, 106, 45), rgb(67, 186, 59) 80%);
 }
 
 .save:active {
@@ -181,8 +181,31 @@ p.error {
     transition: .2s;
 }
 
+.delete[disabled] {
+    display: inline-block;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.27);
+    text-decoration: none;
+    text-shadow: 0 -1px rgba(0, 0, 0, .5);
+    user-select: none;
+    padding: .7em 1.5em;
+    border: 1px solid rgb(106, 39, 39);
+    border-radius: 5px;
+    outline: none;
+    background: rgb(147, 52, 49) linear-gradient(rgb(106, 39, 39), rgb(147, 52, 49) 80%);
+    box-shadow: 0 6px rgb(106, 39, 39),
+    0 3px 15px rgba(0, 0, 0, .4),
+    inset 0 1px rgba(255, 255, 255, .3),
+    inset 0 0 3px rgba(255, 255, 255, .5);
+    transition: .2s;
+}
+
 .delete:hover {
-    background: rgb(147, 66, 40) linear-gradient(rgb(106, 39, 39), rgb(147, 66, 40) 80%);
+    background: rgb(191, 59, 56) linear-gradient(rgb(106, 39, 39), rgb(191, 59, 56) 80%);
+}
+
+.delete:hover[disabled] {
+    background: rgb(147, 52, 49) linear-gradient(rgb(106, 39, 39), rgb(147, 52, 49) 80%);
 }
 
 .delete:active {
@@ -219,7 +242,7 @@ p.error {
 }
 
 .back:hover {
-    background: rgb(61, 174, 216) linear-gradient(rgb(50, 159, 173), rgb(61, 174, 216) 80%);
+    background: rgb(23, 241, 255) linear-gradient(rgb(50, 159, 173), rgb(23, 241, 255) 80%);
 }
 
 .back:active {

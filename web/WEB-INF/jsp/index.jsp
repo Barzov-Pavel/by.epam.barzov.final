@@ -15,11 +15,11 @@
         <p><a href="${userList}"><fmt:message key="index.user"/></a></p>
     </c:if>
     <c:if test="${currentUser.role == \"CUSTOMER\"}">
-        <c:url var="boughtTours" value="/user/bought-tours.html">
+        <c:url var="boughtTours" value="/tour/bought-tours.html">
             <c:param name="userId" value="${currentUser.id}"/>
         </c:url>
         <p><a href="${boughtTours}"><fmt:message key="index.tours"/></a></p>
     </c:if>
-    <c:url var="userList" value="/user/tour-list.html"/>
+    <c:url var="userList" value="/tour/tour-list.html"/>
     <p><a href="${userList}"><fmt:message key="index.tour"/></a></p>
 </u:html>

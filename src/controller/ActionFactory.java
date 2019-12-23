@@ -30,12 +30,12 @@ public class ActionFactory {
         actions.put("/user/edit", UserEditAction.class);
         actions.put("/user/save", UserSaveAction.class);
         actions.put("/user/delete", UserDeleteAction.class);
-        actions.put("/user/tour-list", TourListAction.class);
-        actions.put("/user/tour-edit", TourEditAction.class);
-        actions.put("/user/tour-save", TourSaveAction.class);
-        actions.put("/user/tour-delete", TourDeleteAction.class);
-        actions.put("/user/tour-buy", TourBuyAction.class);
-        actions.put("/user/bought-tours", BoughtToursAction.class);
+        actions.put("/tour/tour-list", TourListAction.class);
+        actions.put("/tour/tour-edit", TourEditAction.class);
+        actions.put("/tour/tour-save", TourSaveAction.class);
+        actions.put("/tour/tour-delete", TourDeleteAction.class);
+        actions.put("/tour/tour-buy", TourBuyAction.class);
+        actions.put("/tour/bought-tours", BoughtToursAction.class);
     }
 
     /*

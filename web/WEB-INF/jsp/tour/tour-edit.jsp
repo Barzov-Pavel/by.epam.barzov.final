@@ -16,9 +16,9 @@
 </c:choose>
 <u:html title="${title}">
     <h2>${title}</h2>
-    <c:url var="urlTourList" value="/user/tour-list.html"/>
-    <c:url var="urlTourDelete" value="/user/tour-delete.html"/>
-    <c:url var="urlTourSave" value="/user/tour-save.html"/>
+    <c:url var="urlTourList" value="/tour/tour-list.html"/>
+    <c:url var="urlTourDelete" value="/tour/tour-delete.html"/>
+    <c:url var="urlTourSave" value="/tour/tour-save.html"/>
     <form action="${urlTourSave}" method="post">
         <c:if test="${not empty tour.id}">
             <input name="id" value="${tour.id}" type="hidden">

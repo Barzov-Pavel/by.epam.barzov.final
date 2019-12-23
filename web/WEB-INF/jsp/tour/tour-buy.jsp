@@ -6,7 +6,7 @@
 <fmt:message var="title" key="tour.buy.title"/>
 <u:html title="${title}">
     <h2><fmt:message key="tour.buy.congratulation"/></h2>
-    <c:url var="boughtTours" value="/user/bought-tours.html">
+    <c:url var="boughtTours" value="/tour/bought-tours.html">
         <c:param name="userId" value="${currentUser.id}"/>
     </c:url>
     <p><a href="${boughtTours}"><fmt:message key="tour.buy.list"/></a></p>
